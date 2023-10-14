@@ -7,13 +7,15 @@ import (
 	"net/http"
 )
 
+const PORT = "3000"
+
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		render(w, "test.page.gohtml")
 	})
 
-	fmt.Println("Starting front end service on port 80")
-	err := http.ListenAndServe(":80", nil)
+	fmt.Printf("Starting front end service on port %s\n", PORT)
+	err := http.ListenAndServe(":3000", nil)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -22,13 +24,13 @@ func main() {
 func render(w http.ResponseWriter, t string) {
 
 	partials := []string{
-		"./front-end/cmd/web/templates/base.layout.gohtml",
-		"./front-end/cmd/web/templates/header.partial.gohtml",
-		"./front-end/cmd/web/templates/footer.partial.gohtml",
+		"./cmd/web/templates/base.layout.gohtml",
+		"./cmd/web/templates/header.partial.gohtml",
+		"./cmd/web/templates/footer.partial.gohtml",
 	}
 
 	var templateSlice []string
-	templateSlice = append(templateSlice, fmt.Sprintf("./front-end/cmd/web/templates/%s", t))
+	templateSlice = append(templateSlice, fmt.Sprintf("./cmd/web/templates/%s", t))
 
 	for _, x := range partials {
 		templateSlice = append(templateSlice, x)

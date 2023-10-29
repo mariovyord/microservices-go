@@ -2,3 +2,4 @@ db-data/mongo
 db-data/postgres
 db-data/rabbitmq
 .DS_Store
+.exe
